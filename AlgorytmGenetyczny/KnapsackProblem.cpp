@@ -10,7 +10,8 @@ void KnapsackProblem::readFromFile(const std::string& path)
 {
 	std::ifstream fin = std::ifstream(path);
 	int listSize;
-	fin >> knapsackCapacity >> listSize;
+	fin.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+	fin >> listSize >> knapsackCapacity;
 	if (knapsackCapacity <= 0 || listSize <= 0)
 		throw std::invalid_argument("Non-positive number found in file " + path);
 	itemList = std::vector<Item>(listSize, Item(0, 0));
@@ -27,7 +28,7 @@ void KnapsackProblem::readFromFile(const std::string& path)
 void KnapsackProblem::saveToFile(const std::string& path)
 {
 	std::ofstream fout = std::ofstream(path);
-	fout << knapsackCapacity << ' ' << itemList.size() << '\n';
+	fout << itemList.size() << ' ' << knapsackCapacity << '\n';
 	for (Item item : itemList)
 	{
 		fout << item.value << ' ' << item.size << '\n';

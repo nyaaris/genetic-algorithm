@@ -9,7 +9,7 @@
 class GeneticAlgorithm {
 private:
 	int popSize, mutationChance, crossingoverChance; // mutChance, crossChance expressed in 1/1000
-	SmartPtr<KnapsackProblem> problem;
+	KnapsackProblem problem;
 	std::vector<Individual> population1, population2;
 	Individual bestFit;
 
@@ -17,13 +17,14 @@ private:
 	std::default_random_engine randEngine;
 
 public:
-	GeneticAlgorithm(int popSize, int mutationChance, int crossingoverChance, KnapsackProblem* problemInstance);
+	GeneticAlgorithm(int popSize, int mutationChance, int crossingoverChance, KnapsackProblem& problemInstance);
 
 	void runAlgorithm(int iterationCount);
 	Individual getResults() { return bestFit; }
 
 private:
 	void generateStartingPopulation();
-	void geneticIteration(std::vector<Individual>& parentPop, std::vector<Individual> newPop);
-
+	void geneticIteration(std::vector<Individual>& parentPop, std::vector<Individual>& newPop);
+	void newPopulation(std::vector<Individual>& parentPop, std::vector<Individual>& newPop);
+	void mutatePopulation(std::vector<Individual>& population);
 };
