@@ -75,22 +75,3 @@ SmartPtr<T>& SmartPtr<T>::operator=(const SmartPtr<T>& other)
 		counter->add();
 }
 
-
-template<typename T>
-struct array {
-	T* arr;
-	size_t size;
-
-	array(size_t arrLength);
-	~array() { delete[] arr; }
-
-	T& operator[](int offset) { return arr[offset]; }
-};
-
-
-template<typename T>
-array<T>::array(size_t arrLength)
-{
-	arr = new T[arrLength];
-	size = arrLength;
-}

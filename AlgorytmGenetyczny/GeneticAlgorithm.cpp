@@ -43,14 +43,19 @@ void GeneticAlgorithm::newPopulation(std::vector<Individual>& parentPop, std::ve
 {
 	int mother1Index, mother2Index;
 	std::uniform_int_distribution<int> parentIndices(0, popSize-1);
+
 	int childrenMade = 0;
 	while (childrenMade < popSize)
 	{
-		int a = parentIndices(randEngine), b = parentIndices(randEngine);
-		mother1Index = parentPop[a].getFitness(problem) >= parentPop[b].getFitness(problem) ? a : b;
-		a = parentIndices(randEngine); b = parentIndices(randEngine);
-		mother2Index = parentPop[a].getFitness(problem) >= parentPop[b].getFitness(problem) ? a : b;
+		int candidate1 = parentIndices(randEngine), candidate2 = parentIndices(randEngine);
+		mother1Index = parentPop[candidate1].getFitness(problem) >= parentPop[candidate2].getFitness(problem) ? candidate1 : candidate2;
+
+		candidate1 = parentIndices(randEngine); candidate2 = parentIndices(randEngine);
+		mother2Index = parentPop[candidate1].getFitness(problem) >= parentPop[candidate2].getFitness(problem) ? candidate1 : candidate2;
+
+
 		std::pair<std::vector<short>, std::vector<short>> children = parentPop[mother1Index].crossover(parentPop[mother2Index], randEngine, crossingoverChance);
+
 		newPop[childrenMade].setGenotype(children.first);
 		if (++childrenMade < popSize)
 			newPop[childrenMade].setGenotype(children.second);

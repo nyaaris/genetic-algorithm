@@ -8,7 +8,7 @@
 
 class GeneticAlgorithm {
 private:
-	int popSize, mutationChance, crossingoverChance; // mutChance, crossChance expressed in 1/1000
+	int popSize, mutationChance, crossingoverChance; // mutationChance, crossingoverChance expressed in 1/1000
 	KnapsackProblem problem;
 	std::vector<Individual> population1, population2;
 	Individual bestFit;

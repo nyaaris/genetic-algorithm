@@ -25,6 +25,7 @@ void Individual::mutate(int mutationChance, std::default_random_engine& randEngi
 {
 	fitnessStored = false;
 	std::uniform_int_distribution<int> distr(1, 1000);
+
 	for (int i = 0; i < binaryGenotype.size(); i++)
 	{
 		if (distr(randEngine) <= mutationChance)
@@ -35,6 +36,7 @@ void Individual::mutate(int mutationChance, std::default_random_engine& randEngi
 std::pair<std::vector<short>, std::vector<short>> Individual::crossover(const Individual& other, std::default_random_engine& randEngine, int crossingoverChance) const
 {
 	std::pair<std::vector<short>, std::vector<short>> result = std::make_pair(binaryGenotype, other.binaryGenotype);
+
 	if (std::uniform_int_distribution<int>(1, 1000)(randEngine) <= crossingoverChance)
 	{
 		int cuttingPoint = std::uniform_int_distribution<int>(0, binaryGenotype.size()-2)(randEngine);
